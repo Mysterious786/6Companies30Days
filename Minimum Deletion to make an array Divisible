@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums, vector<int>& numsDivide) {
+      priority_queue<int,vector<int>,greater<int>> pq;
+      int gcd=numsDivide[0];
+      int countDeletion=0;
+      for(int i=1;i<numsDivide.size();i++){
+          gcd=__gcd(gcd,numsDivide[i]);
+      }  
+      for(auto&i:nums){
+          pq.push(i);
+      }
+      while(!pq.empty()){
+          int top=pq.top();
+          pq.pop();
+          if(gcd%top==0) return countDeletion;
+          if(top>gcd) return -1;
+          countDeletion++;
+      }
+      return -1;
+
+    }
+};
